@@ -24,5 +24,9 @@ jobs:
         pip install -r requirements.txt  # Replace with your requirements file name
 
     - name: Run bot
-      run: python bot.py  # Replace with your bot script file name
+      run: python bot.py
+      env:
+        BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+
+
 
