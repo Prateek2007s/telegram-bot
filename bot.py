@@ -1,7 +1,7 @@
 import re
 import logging
 from telegram import Update
-from telegram.ext import Updater, CommandHandler, MessageHandler, MessageFilters, CallbackContext, ConversationHandler
+from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, ConversationHandler, CallbackContext
 
 # Bot token
 TOKEN = '6578215509:AAGqjogNKvJY4M_LyfTWrTb7VVgfkJ75h2c'
@@ -45,16 +45,16 @@ def main():
     conv_handler = ConversationHandler(
         entry_points=[CommandHandler('start', start)],
         states={
-            'channel_link': [MessageHandler(MessageFilters.text & ~MessageFilters.command, handle_channel_link)]
+            'channel_link': [MessageHandler(Filters.text & ~Filters.command, handle_channel_link)]
         },
         fallbacks=[]
     )
 
     dispatcher.add_handler(conv_handler)
-    dispatcher.add_handler(MessageHandler(MessageFilters.text & ~MessageFilters.command, handle_message))
+    dispatcher.add_handler(MessageHandler(Filters.text & ~Filters.command, handle_message))
 
     updater.start_polling()
     updater.idle()
 
-if name == 'main':
+if __name__ == '__main__':
     main()
